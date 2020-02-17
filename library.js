@@ -11,7 +11,7 @@ var YoutubeLite = {};
 YoutubeLite.apiKey = null;
 YoutubeLite.cache = cache;
 
-YoutubeLite.youtubeUrl = /(<p>|^)((<a.*?href="((https?:\/\/(?:www\.)?)?youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|(https?:\/\/)?youtu\.be\/)(([a-zA-Z0-9_-]{6,11})(?:(?:[&\?#])([^"]+))?)"[^>]*?>)(\4\7)<\/a>)(<br\/?>|<\/p>)/m;
+YoutubeLite.youtubeUrl = /(<p.*>|^)((<a.*?href="((https?:\/\/(?:www\.)?)?youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|(https?:\/\/)?youtu\.be\/)(([a-zA-Z0-9_-]{6,11})(?:(?:[&\?#])([^"]+))?)"[^>]*?>)(\4\7)<\/a>)(<br\/?>|<\/p>)/m;
 
 YoutubeLite.init = function(params, callback) {
     var router = params.router,
@@ -141,6 +141,7 @@ function replaceAll(text, search, replace) {
 function spliceSlice(str, index, count, add) {
 return str.slice(0, index) + (add || "") + str.slice(index + count);
 }
+
 
 /*
 [
@@ -418,5 +419,15 @@ function timeToString(seconds){
 }
 
 YoutubeLite.timeToString = timeToString;
+
+YoutubeLite.filterSanitizeConfig  = function (sanitizeConfig, callback) {
+    sanitizeConfig.allowedTags.push('svg', 'path');
+    sanitizeConfig.allowedAttributes.svg = sanitizeConfig.allowedAttributes.svg || [];
+    sanitizeConfig.allowedAttributes.svg.push('viewbox', 'height', 'version', 'width' );
+    sanitizeConfig.allowedAttributes.path = sanitizeConfig.allowedAttributes.path || [];
+    sanitizeConfig.allowedAttributes.path.push('class', 'd', 'fill', 'fill-opacity' );
+	sanitizeConfig.allowedAttributes.button.push('onclick', 'aria-*');
+	callback(null, sanitizeConfig);
+};
 
 module.exports = YoutubeLite;

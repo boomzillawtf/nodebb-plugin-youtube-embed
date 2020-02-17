@@ -5,6 +5,7 @@
 	"url": "https://github.com/a5mith/nodebb-plugin-youtube-lite",
 	"library": "./library.js",
 	"hooks": [
+		{ "hook": "filter:sanitize.config", "method": "filterSanitizeConfig", "priority": 10 },
 		{ "hook": "filter:parse.raw", "method": "parseRaw", "priority": 10 },
 		{ "hook": "filter:parse.post", "method": "parsePost", "priority": 10 },
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
