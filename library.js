@@ -17,7 +17,7 @@ YoutubeLite.init = function(params, callback) {
     var router = params.router,
         hostMiddleware = params.middleware,
         hostControllers = params.controllers,
-		db = module.parent.require('./database');
+		db = require.main.require('./src/database');
     // We create two routes for every view. One API call, and the actual route itself.
     // Just add the buildHeader middleware to your route and NodeBB will take care of everything for you.
 
