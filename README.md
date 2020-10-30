@@ -17,7 +17,10 @@ Search in the
     npm install nodebb-plugin-youtube-embed
 
 ## Changes
-
+    0.6.9
+     - Fixed db require
+    0.6.8
+     - Compatibility update to 1.13
     0.6.7
      - Exception handling for parsing API requests.
      - Unavailable videos don't have a channel name, replaceAll checks for no text.
